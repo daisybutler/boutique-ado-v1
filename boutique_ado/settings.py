@@ -38,11 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # used by the social account app to create the proper callback URLs when connecting via social media accounts.
+    'django.contrib.sites',  # used by the social account app to create the proper callback URLs when connecting via social media accounts.
     'allauth',
-    'allauth.account', # logging in functionality
-    'allauth.socialaccount', # logging in via social accounts functionality
-    'home'
+    'allauth.account',  # logging in functionality
+    'allauth.socialaccount',  # logging in via social accounts functionality
+    'home',
+    'products',
 ]
 
 MIDDLEWARE = [
