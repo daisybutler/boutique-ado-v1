@@ -2,6 +2,11 @@ from django.db import models
 
 
 class Category(models.Model):
+
+    # Django makes plural models by just adding an s. Specify otherwise like this
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
