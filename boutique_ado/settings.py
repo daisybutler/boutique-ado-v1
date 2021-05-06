@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     # Other
     'crispy_forms',
+    'storages',
 
 ]
 
@@ -178,6 +179,32 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # Where all uploaded media files will go
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+"""
+When our project is deployed to Heroku, Heroku will run
+python3 manage.py collectstatic during the build process
+which will search through all our apps and project folders
+looking for static files. And it will use the s3 custom domain
+setting here in conjunction with our custom storage classes
+that tell it the location at that URL where we'd like to save things.
+"""
+if 'USE_AWS' in os.environ:
+    # BUCKET CONFIG
+    AWS_STORAGE_BUCKET_NAME = 'daisybutler-boutique-ado'
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Overide static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
 # Stripe
 FREE_DELIVERY_THRESHOLD = 50
