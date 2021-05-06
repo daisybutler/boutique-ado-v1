@@ -22,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-yh&0t-g6mc2ouo8+1cn@0l5&kdw3x2cn13wg!_wf!#%efmift'
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Set to be true only if development is set to true in environment
+DEBUG = 'DEVELOPMENT' in os.environ
 
 # Host name of heroku app AND local host so it still runs in gitpod
 ALLOWED_HOSTS = ['daisybutler-boutique-ado.herokuapp.com', 'localhost']
