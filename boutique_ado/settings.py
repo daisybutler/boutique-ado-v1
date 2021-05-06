@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Retrieving from gitpod variables in gitpod settings
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -31,7 +30,6 @@ DEBUG = 'DEVELOPMENT' in os.environ
 
 # Host name of heroku app AND local host so it still runs in gitpod
 ALLOWED_HOSTS = ['daisybutler-boutique-ado.herokuapp.com', 'localhost']
-
 
 # Application definition
 
@@ -42,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',  # used by the social account app to create the proper callback URLs when connecting via social media accounts.
+    'django.contrib.sites', # used by the social account app to create the proper callback URLs when connecting via social media accounts.
     'allauth',
     'allauth.account',  # logging in functionality
     'allauth.socialaccount',  # logging in via social accounts functionality
