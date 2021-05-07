@@ -189,6 +189,14 @@ setting here in conjunction with our custom storage classes
 that tell it the location at that URL where we'd like to save things.
 """
 if 'USE_AWS' in os.environ:
+    # Cache control - tells the browser it's okay to cache
+    # static files for a long time since they don't change very often
+    # and this will improve performance for our users.
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age-94608000',
+    }
+
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'daisybutler-boutique-ado'
     AWS_S3_REGION_NAME = 'eu-west-2'
